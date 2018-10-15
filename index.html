@@ -27,6 +27,8 @@
         <td v-on:click="button('blue')" v-bind:class="{blueFlashBackground: blueFlash}"id="blue"></td>
       </tr>
     </table>
+
+    <p v-if="gameLost">You clicked the wrong color.  Click start to play again.</p>
   </div>
 
 

@@ -10,47 +10,92 @@ new Vue ({
     redFlash: false,
     userSequence: [],
     computerSequence: [],
-    currentIndex = 0
+    currentIndex: 0,
+    gameLost: false
 
   },
 
   methods: {
     start: function () {
 
+      this.gameLost = false;
+      this.computerPlay();
+
+
+    },
+
+    computerPlay: function () {
+
+      this.currentIndex = 0;
       let randomColor = this.getRandomColor();
       this.computerSequence.push(randomColor);
-      this.flash(this.computerSequence[0]);
+
+      let vue = this;
+      let repeater = setInterval(function() {
+
+        if (vue.currentIndex < vue.computerSequence.length) {
+
+          vue.flashOn(vue.computerSequence[vue.currentIndex]);
+          vue.currentIndex++;
+          setTimeout(function() {
+            vue.flashOff();
+
+          }, 500);
+             // vue.currentIndex++;
+        } else {
+          
+            vue.currentIndex = 0;
+
+            console.log('clearing the interval');
+            clearInterval(repeater);
+
+          }
+      }, 1000);
+
+
 
     },
 
     button: function (color) {
 
-      this.flash(color);
-      // What index are we at?
 
-      // check that this was the right color
-      if (color == this.computerSequence[this.currentIndex]) {
+      let vue = this;
 
-        if (this.currentIndex == this.computerSequence.length - 1) {
+      this.flashOn(color);
+      setTimeout(function() {
+        vue.flashOff();
 
-          this.computerPlay();
+          console.log(color);
+          console.log(vue.computerSequence[vue.currentIndex]);
+          console.log(vue.currentIndex);
+        if (color == vue.computerSequence[vue.currentIndex]) {
+
+          if (vue.currentIndex == vue.computerSequence.length - 1) {
+
+            vue.computerPlay();
+
+          } else {
+
+            vue.currentIndex++;
+
+          }
 
         } else {
 
-          this.currentIndex++;
+          vue.gameLost = true;
+          vue.currentIndex = 0;
+          vue.computerSequence = [];
 
         }
 
-      } else {
+      }, 500);
 
-        // Game is over
-
-      }
+      // check that this was the right color
 
 
     },
 
-    flash: function (color) {
+    flashOn: function (color) {
       if (color == 'green'){
         this.greenFlash = true;
       }else if (color == 'red'){
@@ -61,13 +106,16 @@ new Vue ({
         this.yellowFlash = true;
       }
 
-      let vue = this;
-      setTimeout(function() {
-        vue.greenFlash = false;
-        vue.redFlash = false;
-        vue.blueFlash = false;
-        vue.yellowFlash = false;
-      }, 500);
+
+
+    },
+
+    flashOff: function () {
+
+      this.greenFlash = false;
+      this.redFlash = false;
+      this.blueFlash = false;
+      this.yellowFlash = false;
 
     },
 
