@@ -1,25 +1,25 @@
 #red {
-  background-color: red;
+  background-color: #b50000;
   width: 50%;
   border-radius: 100% 0 0 0;
 
 }
 
 #yellow {
-  background-color: yellow;
+  background-color: #ccc804;
   border-radius: 0 100% 0 0;
 
 }
 
 #green {
-  background-color: green;
+  background-color: #008e02;
   border-radius: 0 0 0 100%;
 
 
 }
 
 #blue {
-  background-color: blue;
+  background-color: #0007ea;
   border-radius: 0 0 100% 0;
 }
 
@@ -48,4 +48,23 @@ table {
   color: white;
   text-align: center;
   line-height: 50px;
+}
+
+#red.redFlashBackground {
+
+  background-color: #ff3d3d;
+}
+
+#green.greenFlashBackground {
+
+  background-color: #59ff67;
+}
+
+#yellow.yellowFlashBackground {
+  background-color: #fffc7a;
+
+}
+
+#blue.blueFlashBackground {
+  background-color: #93cdff;
 }
