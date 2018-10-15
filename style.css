@@ -48,7 +48,9 @@ table {
   color: white;
   text-align: center;
   line-height: 50px;
+  cursor: default;
 }
+
 
 #red.redFlashBackground {
 
