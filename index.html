@@ -28,6 +28,8 @@
       </tr>
     </table>
 
+    <p id="timer" v-if="timerActive">{{ displayTimer }}</p>
+
     <p v-if="gameLost">You clicked the wrong color.  Click start to play again.</p>
   </div>
 

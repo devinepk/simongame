@@ -11,13 +11,17 @@ new Vue ({
     userSequence: [],
     computerSequence: [],
     currentIndex: 0,
-    gameLost: false
+    gameLost: false,
+    timer: null,
+    displayTimer: 3,
+    timerActive: false
 
   },
 
   methods: {
     start: function () {
-
+      this.displayTimer = 3
+      this.computerSequence = []
       this.gameLost = false;
       this.computerPlay();
 
@@ -43,9 +47,9 @@ new Vue ({
           }, 500);
              // vue.currentIndex++;
         } else {
-          
-            vue.currentIndex = 0;
 
+            vue.currentIndex = 0;
+            vue.startCountdown();
             console.log('clearing the interval');
             clearInterval(repeater);
 
@@ -56,9 +60,28 @@ new Vue ({
 
     },
 
+    startCountdown: function () {
+      let vue = this
+      this.timerActive = true;
+      this.displayTimer = 3;
+      this.timer = setInterval(function() {
+        if(vue.displayTimer > 0){
+        vue.displayTimer-=1
+
+      }else {
+        vue.timerActive = false;
+        clearInterval(vue.timer);
+        alert("times up you lose");
+      }
+      }, 1000 );
+
+
+    },
+
     button: function (color) {
+      this.timerActive = false;
 
-
+      clearInterval(this.timer);
       let vue = this;
 
       this.flashOn(color);
@@ -75,6 +98,7 @@ new Vue ({
             vue.computerPlay();
 
           } else {
+            vue.startCountdown();
 
             vue.currentIndex++;
 

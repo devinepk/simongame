@@ -51,6 +51,10 @@ table {
   cursor: default;
 }
 
+#startbutton:active {
+  background-color: grey;
+}
+
 
 #red.redFlashBackground {
 
@@ -69,4 +73,10 @@ table {
 
 #blue.blueFlashBackground {
   background-color: #93cdff;
+}
+
+#timer {
+  font-size: 100px;
+  text-align: center;
+
 }
