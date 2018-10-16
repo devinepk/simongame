@@ -20,8 +20,8 @@
 
     <table>
       <tr>
-        <td v-on:click="button('red')"  v-bind:class="{redFlashBackground: redFlash}" id="red" ></td>
-        <td v-on:click="button('yellow')" v-bind:class="{yellowFlashBackground: yellowFlash}" id="yellow" ></td>
+        <td v-on:click="button('red')"  v-bind:class="{redFlashBackground: redFlash}" id="red"></td>
+        <td v-on:click="button('yellow')" v-bind:class="{yellowFlashBackground: yellowFlash}" id="yellow"></td>
       </tr>
       <tr>
         <td v-on:click="button('green')" v-bind:class="{greenFlashBackground: greenFlash}" id="green"></td>
@@ -29,12 +29,11 @@
       </tr>
     </table>
 
-    <p class="message">Your High Score: {{ highScore }}</p>
-    <p class="message">Level: {{ computerSequence.length }}</p>
 
-    <p class="message big" v-if="timerActive">{{ displayTimer }}</p>
-
-    <p v-if="gameLost" class="message big">You lose. 😱</p>
+    <message>Your High Score: {{ highScore }}</message>
+    <message>Level: {{ computerSequence.length }}</message>
+    <message big="true" v-if="timerActive">{{ displayTimer }}</message>
+    <message big="true" v-if="gameLost">You lose. 😱</message>
   </div>
 
 

@@ -1,3 +1,9 @@
+Vue.component('message', {
+  props: ['big' ],
+
+  template: '<p class="message" v-bind:class="{ big: this.big }"><slot></slot></p>'
+});
+
 new Vue ({
 
   el: '#gameboard',
@@ -182,7 +188,7 @@ new Vue ({
       if (input > localStorage.getItem("Level")) {
         localStorage.setItem("Level", input);
         vue.highScore = input;
-        
+
       }
 
     // Save the value in localstorage
