@@ -4,27 +4,30 @@ new Vue ({
 
 
   data: {
+    gameInProgress: false,
     blueFlash: false,
     greenFlash: false,
     yellowFlash: false,
     redFlash: false,
-    userSequence: [],
     computerSequence: [],
+    computerInterval: null,
     currentIndex: 0,
     gameLost: false,
     timer: null,
     displayTimer: 3,
-    timerActive: false
-
+    timerActive: false,
+    playerTurn: false
   },
 
   methods: {
     start: function () {
-      this.displayTimer = 3
-      this.computerSequence = []
+      clearInterval(this.timer);
+      clearInterval(this.computerInterval);
+      this.gameInProgress = true;
+      this.displayTimer = 3;
+      this.computerSequence = [];
       this.gameLost = false;
       this.computerPlay();
-
 
     },
 
@@ -35,7 +38,7 @@ new Vue ({
       this.computerSequence.push(randomColor);
 
       let vue = this;
-      let repeater = setInterval(function() {
+      this.computerInterval = setInterval(function() {
 
         if (vue.currentIndex < vue.computerSequence.length) {
 
@@ -45,13 +48,12 @@ new Vue ({
             vue.flashOff();
 
           }, 500);
-             // vue.currentIndex++;
-        } else {
 
+        } else {
+            vue.playerTurn = true;
             vue.currentIndex = 0;
             vue.startCountdown();
-            console.log('clearing the interval');
-            clearInterval(repeater);
+            clearInterval(vue.computerInterval);
 
           }
       }, 1000);
@@ -64,57 +66,65 @@ new Vue ({
       let vue = this
       this.timerActive = true;
       this.displayTimer = 3;
-      this.timer = setInterval(function() {
-        if(vue.displayTimer > 0){
-        vue.displayTimer-=1
 
-      }else {
-        vue.timerActive = false;
-        clearInterval(vue.timer);
-        alert("times up you lose");
-      }
+      this.timer = setInterval(function() {
+        if (vue.displayTimer > 1){
+
+          vue.displayTimer -= 1
+
+        } else {
+          vue.timerActive = false;
+          clearInterval(vue.timer);
+          vue.youLose();
+        }
       }, 1000 );
 
 
     },
 
+    youLose: function() {
+
+      this.gameLost = true;
+      this.gameInProgress = false;
+      this.currentIndex = 0;
+      this.computerSequence = [];
+
+    },
+
     button: function (color) {
+      if (!this.gameInProgress || !this.playerTurn) return;
+
       this.timerActive = false;
 
       clearInterval(this.timer);
       let vue = this;
 
       this.flashOn(color);
+      this.playerTurn = false;
       setTimeout(function() {
-        vue.flashOff();
 
-          console.log(color);
-          console.log(vue.computerSequence[vue.currentIndex]);
-          console.log(vue.currentIndex);
+        vue.flashOff();
+        vue.playerTurn = true;
+
         if (color == vue.computerSequence[vue.currentIndex]) {
 
           if (vue.currentIndex == vue.computerSequence.length - 1) {
-
+            vue.playerTurn = false;
             vue.computerPlay();
 
           } else {
             vue.startCountdown();
-
             vue.currentIndex++;
 
           }
 
         } else {
-
-          vue.gameLost = true;
-          vue.currentIndex = 0;
-          vue.computerSequence = [];
+          vue.youLose();
 
         }
 
       }, 500);
 
-      // check that this was the right color
 
 
     },
@@ -141,15 +151,6 @@ new Vue ({
       this.blueFlash = false;
       this.yellowFlash = false;
 
-    },
-
-    play: function () {
-      // flash ( color1)
-      // setTimeout(flash (color2)  , 500)
-
-
-
-    //  computerSequence.push
     },
 
     getRandomColor: function() {

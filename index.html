@@ -12,25 +12,26 @@
 
   <body>
 
-  <div id="gameboard">
+  <div id="gameboard" v-cloak>
     <div v-on:click="start" id="startbutton">
-    start
+    SIMON
+      <div v-if="!gameInProgress">click to play</div>
     </div>
 
     <table>
       <tr>
-        <td v-on:click="button('red')"  v-bind:class="{redFlashBackground: redFlash}"id="red" ></td>
-        <td v-on:click="button('yellow')" v-bind:class="{yellowFlashBackground: yellowFlash}"id="yellow" ></td>
+        <td v-on:click="button('red')"  v-bind:class="{redFlashBackground: redFlash}" id="red" ></td>
+        <td v-on:click="button('yellow')" v-bind:class="{yellowFlashBackground: yellowFlash}" id="yellow" ></td>
       </tr>
       <tr>
         <td v-on:click="button('green')" v-bind:class="{greenFlashBackground: greenFlash}" id="green"></td>
-        <td v-on:click="button('blue')" v-bind:class="{blueFlashBackground: blueFlash}"id="blue"></td>
+        <td v-on:click="button('blue')" v-bind:class="{blueFlashBackground: blueFlash}" id="blue"></td>
       </tr>
     </table>
 
     <p id="timer" v-if="timerActive">{{ displayTimer }}</p>
 
-    <p v-if="gameLost">You clicked the wrong color.  Click start to play again.</p>
+    <p v-if="gameLost" id="message">You lose. 😱</p>
   </div>
 
 

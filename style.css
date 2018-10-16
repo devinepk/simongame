@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Press+Start+2P');
+
+body {
+  background: black;
+  color: white;
+  font-family: 'Press Start 2P', Helvetica, Arial, sans-serif;
+}
+
 #red {
   background-color: #b50000;
   width: 50%;
@@ -24,35 +32,52 @@
 }
 
 table {
-  width: 300px;
-  height: 300px;
+  width: 500px;
+  height: 500px;
   margin: auto;
   border-radius: 20px;
+  margin: 50px 0;
+}
+
+td {
+  border: 2px solid black;
 }
 
 #gameboard {
   position: relative;
-  width: 300px;
+  width: 500px;
   margin: auto;
 
 }
 
 #startbutton {
+  font-family: 'Press Start 2P', Helvetica, Arial, sans-serif;
   position: absolute;
-  width: 50px;
-  height: 50px;
+  width: 250px;
+  height: 250px;
   top: 125px;
   left: 125px;
   border-radius: 100%;
   background-color: black;
   color: white;
   text-align: center;
-  line-height: 50px;
+  line-height: 250px;
   cursor: default;
+  font-weight: bold;
+  font-size: 40px;
+  overflow: hidden;
 }
 
 #startbutton:active {
   background-color: grey;
+}
+
+#startbutton div {
+  position: relative;
+  top: -90px;
+  line-height: initial;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 1rem;
 }
 
 
@@ -75,8 +100,18 @@ table {
   background-color: #93cdff;
 }
 
-#timer {
-  font-size: 100px;
+#timer, #message {
+  font-size: 40px;
   text-align: center;
+  margin: 0;
+}
 
+[v-cloak] {
+  display:none;
+}
+
+h1 {
+  text-align: center;
+  font-family: 'Press Start 2P', Helvetica, Arial, sans-serif;
+  margin-top: 50px;
 }
