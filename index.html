@@ -29,12 +29,12 @@
       </tr>
     </table>
 
-    <p id="level">Your High Score: {{ highScore }}</p>
-    <p id="level">Level: {{ computerSequence.length }}</p>
+    <p class="message">Your High Score: {{ highScore }}</p>
+    <p class="message">Level: {{ computerSequence.length }}</p>
 
-    <p id="timer" v-if="timerActive">{{ displayTimer }}</p>
+    <p class="message big" v-if="timerActive">{{ displayTimer }}</p>
 
-    <p v-if="gameLost" id="message">You lose. 😱</p>
+    <p v-if="gameLost" class="message big">You lose. 😱</p>
   </div>
 
 
