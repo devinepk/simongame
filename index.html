@@ -29,6 +29,8 @@
       </tr>
     </table>
 
+    <p id="level">Level: {{ computerSequence.length }}</p> 
+
     <p id="timer" v-if="timerActive">{{ displayTimer }}</p>
 
     <p v-if="gameLost" id="message">You lose. 😱</p>

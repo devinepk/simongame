@@ -115,3 +115,7 @@ h1 {
   font-family: 'Press Start 2P', Helvetica, Arial, sans-serif;
   margin-top: 50px;
 }
+
+#level {
+  text-align: center;
+}
