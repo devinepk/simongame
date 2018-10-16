@@ -16,7 +16,9 @@ new Vue ({
     timer: null,
     displayTimer: 3,
     timerActive: false,
-    playerTurn: false
+    playerTurn: false,
+    highScore: localStorage.getItem("Level")
+
   },
 
   methods: {
@@ -75,6 +77,7 @@ new Vue ({
         } else {
           vue.timerActive = false;
           clearInterval(vue.timer);
+          vue.saveInput();
           vue.youLose();
         }
       }, 1000 );
@@ -119,6 +122,7 @@ new Vue ({
           }
 
         } else {
+          vue.saveInput();
           vue.youLose();
 
         }
@@ -168,6 +172,22 @@ new Vue ({
       if (random == 4) {
         return 'yellow';
       }
+    },
+
+    saveInput: function () {
+    let vue = this;
+    // Get the value from the input field
+    let input = vue.computerSequence.length - 1;
+
+      if (input > localStorage.getItem("Level")) {
+        localStorage.setItem("Level", input);
+        vue.highScore = input;
+        
+      }
+
+    // Save the value in localstorage
+
+
     }
 
   }
